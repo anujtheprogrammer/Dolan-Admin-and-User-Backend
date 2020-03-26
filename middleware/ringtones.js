@@ -1,7 +1,7 @@
 const ringtone = require("../models/ringtone")
 const nrtr = require("../models/nrtr")
 const prtr = require("../models/prtr")
-
+const Op = require("sequelize").Op
 
 module.exports = { 
     createringtone: (req,res) =>{
@@ -9,11 +9,13 @@ module.exports = {
         ringtone.create({
             Name:req.body.Name,
             Path:req.body.Path,
-            Author:req.body.Author,
             Downloads:req.body.Downloads,
             createdBy:req.body.createdBy,
             updatedBy:req.body.updatedby,
-            status:req.body.status
+            status:req.body.status,
+            Duration:req.body.Duration,
+            AlbumArt:req.body.albumArt,
+            About:req.body.About
         },
         {raw:true}
         ).then( m=> {
@@ -50,13 +52,18 @@ module.exports = {
     getringtones:(req,res) =>{
         console.log(req.body)
         nrtr.findAll({
+            limit:15,
             where:{
-                id:req.params.id
+                CatID:req.params.cid,
+                id:{
+                    [Op.gt]:req.params.id
+                }
             },
             raw:true
         }).then(y=>{
             console.log(y)
             ringtone.findAll({
+                limit : 15,
                 where:{
                     id:y.map(a=>a.SID)
                 },
@@ -70,7 +77,10 @@ module.exports = {
         console.log(req.body)
         prtr.findAll({
             where:{
-                id:req.params.id
+                CatID:req.params.cid,
+                id:{
+                    [Op.gt]:req.params.id
+                }
             },
             raw:true
         }).then(a=>{
@@ -83,6 +93,7 @@ module.exports = {
             }).then(b=>{
                 console.log(b)
                 ringtone.findAll({
+                    limit:15,
                     where:{
                         id:b.map(c=>c.SID)
                     },

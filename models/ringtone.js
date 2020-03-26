@@ -7,9 +7,6 @@ const ringtone = db.define('rtsources',{
     Path:{
         type:sequelize.STRING
     },
-    Author:{
-        type:sequelize.INTEGER
-    },
     Downloads:{
         type:sequelize.INTEGER
     },
@@ -21,6 +18,15 @@ const ringtone = db.define('rtsources',{
     },
     Status:{
         type:sequelize.BOOLEAN
+    },
+    Duration:{
+        type:sequelize.INTEGER
+    },
+    AlbumArt:{
+        type:sequelize.STRING
+    },
+    About:{
+        type:sequelize.STRING
     }
 });
 

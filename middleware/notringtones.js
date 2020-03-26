@@ -21,6 +21,7 @@ module.exports = {
     getnotringtone: (req,res)=>{
         console.log(req.body)
         notringtone.findAll({
+            limit:15,
             where:{
                 id:req.params.id
             },

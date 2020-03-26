@@ -1,6 +1,9 @@
 const wallpaper = require("../models/wallpaper")
 const nwr = require("../models/nwr")
 const pwr = require("../models/pwr")
+const Op = require("sequelize").Op
+
+
 module.exports = {
     createwallpaper: (req,res) =>{
         console.log(req.body);
@@ -48,8 +51,12 @@ module.exports = {
     getwallpaper: (req,res) => {
         console.log(req.params)
         nwr.findAll({
+            limit:5,
             where: {
-                CatID: req.params.id
+                CatID: req.params.cid,
+                id:{
+                    [Op.gt]:req.params.id
+                }
             },
             raw:true
         })
@@ -69,7 +76,10 @@ module.exports = {
     getpopwallpaper: (req,res) => {
         pwr.findAll({
             where: {
-                id: req.params.id
+                CatID: req.params.cid,
+                id:{
+                    [Op.gt]:req.params.id
+                }
             },
             raw:true
         }).then(v =>{
@@ -82,8 +92,9 @@ module.exports = {
             }).then(w=>{
                 console.log(w.map(b => b.SID))
                 wallpaper.findAll({
+                    
                     where:{
-                    id: w.map(b => b.SID)
+                    id:w.map(b => b.SID)
                 },
                 raw:true
             }).then(x=>{

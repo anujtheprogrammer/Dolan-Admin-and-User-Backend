@@ -12,6 +12,7 @@ router.get("/wallpaper/normal/category/:cid/:id",(req,res) => wallpaper.getwallp
 router.get("/wallpaper/popular/category/:cid/:id",(req,res) => wallpaper.getpopwallpaper(req,res));
 router.get("/ringtone/normal/category/:cid/:id",(req,res) => ringtone.getringtones(req,res));
 router.get("/ringtone/popular/category/:cid/:id",(req,res) => ringtone.getpopringtones(req,res));
-router.get("/notificationringtone/:id",(req,res) => notringtone.getnotringtone(req,res));
+router.get("/notringtone/normal/category/:cid/:id",(req,res) => notringtone.getnotringtone(req,res));
+router.get("/notringtone/poplar/category/:cid/:id",(req,res) => notringtone.getpopnotringtone(req,res));
 
 module.exports = router;

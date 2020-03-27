@@ -7,9 +7,6 @@ const nrtst = db.define('notringtonesources',{
     Path:{
         type:sequelize.STRING
     },
-    Author:{
-        type:sequelize.INTEGER
-    },
     Downloads:{
         type:sequelize.INTEGER
     },
@@ -21,6 +18,15 @@ const nrtst = db.define('notringtonesources',{
     },
     Status:{
         type:sequelize.BOOLEAN
+    },
+    Duration:{
+        type:sequelize.INTEGER
+    },
+    AlbumArt:{
+        type:sequelize.STRING
+    },
+    About:{
+        type:sequelize.STRING
     }
 });
 
